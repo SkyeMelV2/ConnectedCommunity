@@ -5,10 +5,9 @@ import os
 app = Flask(__name__)
 CORS(app, resources={
     r"/*": {
-        "origins": ["https://*.myshopify.com", "https://*.shopifypreview.com"],
+        "origins": "*",  # Allow all origins temporarily for testing
         "methods": ["GET", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Accept"],
-        "expose_headers": ["Content-Type"]
+        "allow_headers": ["Content-Type", "Accept"]
     }
 })
 
