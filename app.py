@@ -4,10 +4,11 @@ import os
 
 app = Flask(__name__)
 CORS(app, resources={
-    r"/*": {  # Allow all routes
-        "origins": "*",  # Allow all origins in development
+    r"/*": {
+        "origins": ["https://*.myshopify.com", "https://*.shopifypreview.com"],
         "methods": ["GET", "OPTIONS"],
-        "allow_headers": ["Content-Type", "Accept"]
+        "allow_headers": ["Content-Type", "Accept"],
+        "expose_headers": ["Content-Type"]
     }
 })
 
@@ -50,6 +51,13 @@ def get_demographics_by_year(year):
 @app.route('/api/population/years', methods=['GET'])
 def get_available_years():
     return jsonify(list(population_data.keys()))
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Accept')
+    response.headers.add('Access-Control-Allow-Methods', 'GET,OPTIONS')
+    return response
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 10000))  # Changed default port to 10000
