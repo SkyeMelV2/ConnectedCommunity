@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -25,24 +26,26 @@ population_data = {
 }
 
 @app.route('/api/population', methods=['GET'])
-def get_population():
     return jsonify(population_data)
-
+    return jsonify(population_data)
 @app.route('/api/population/<year>', methods=['GET'])
-def get_population_by_year(year):
-    if year in population_data:
+def get_population_by_year(year):>', methods=['GET'])
+    if year in population_data:):
         return jsonify(population_data[year])
     return jsonify({"error": "Year not found"}), 404
-
-@app.route('/api/population/demographics/<year>', methods=['GET'])
-def get_demographics_by_year(year):
-    if year in population_data:
-        return jsonify(population_data[year]['demographics'])
     return jsonify({"error": "Year not found"}), 404
-
+@app.route('/api/population/demographics/<year>', methods=['GET'])
+def get_demographics_by_year(year):phics/<year>', methods=['GET'])
+    if year in population_data:ar):
+        return jsonify(population_data[year]['demographics'])
+    return jsonify({"error": "Year not found"}), 404aphics'])
+    return jsonify({"error": "Year not found"}), 404
 @app.route('/api/population/years', methods=['GET'])
-def get_available_years():
+def get_available_years():n/years', methods=['GET'])
     return jsonify(list(population_data.keys()))
-
+    return jsonify(list(population_data.keys()))
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))_':
+
+    app.run(debug=True, host='0.0.0.0', port=port)    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
