@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -33,6 +33,16 @@ def get_population_by_year(year):
     if year in population_data:
         return jsonify(population_data[year])
     return jsonify({"error": "Year not found"}), 404
+
+@app.route('/api/population/demographics/<year>', methods=['GET'])
+def get_demographics_by_year(year):
+    if year in population_data:
+        return jsonify(population_data[year]['demographics'])
+    return jsonify({"error": "Year not found"}), 404
+
+@app.route('/api/population/years', methods=['GET'])
+def get_available_years():
+    return jsonify(list(population_data.keys()))
 
 if __name__ == '__main__':
     app.run(debug=True)
