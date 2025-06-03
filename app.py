@@ -4,10 +4,10 @@ import os
 
 app = Flask(__name__)
 CORS(app, resources={
-    r"/api/*": {
-        "origins": "*",  # In production, specify your Shopify domain
+    r"/*": {  # Allow all routes
+        "origins": "*",  # Allow all origins in development
         "methods": ["GET", "OPTIONS"],
-        "allow_headers": ["Content-Type"]
+        "allow_headers": ["Content-Type", "Accept"]
     }
 })
 
